@@ -1,9 +1,114 @@
-angular.module 'builder.components', ['builder', 'validator.rules']
+angular.module 'builder.components', ['builder', 'validator.rules', 'ui.bootstrap']
+.controller "DateController", ($scope) ->
+  $scope.today = ->
+    $scope.date = new Date()
+
+  $scope.today()
+  $scope.clear = ->
+    $scope.date = null
+
+  # Disable weekend selection
+  $scope.disabled = (date, mode) ->
+    mode is "day" and (date.getDay() is 0 or date.getDay() is 6)
+
+  $scope.toggleMin = ->
+    $scope.minDate = (if $scope.minDate then null else new Date())
+
+  $scope.toggleMin()
+  $scope.open = ($event) ->
+    $event.preventDefault()
+    $event.stopPropagation()
+    $scope.opened = true
+
+  $scope.dateOptions =
+    formatYear: "yy"
+    startingDay: 1
+
+  $scope.formats = [
+    "MM/dd/yyyy"
+#    "yyyy/MM/dd"
+#    "dd.MM.yyyy"
+#    "shortDate"
+  ]
+
+  $scope.format = $scope.formats[0]
 
 .config ['$builderProvider', ($builderProvider) ->
     # ----------------------------------------
-    # text input
+    # date input
     # ----------------------------------------
+    $builderProvider.registerComponent 'date',
+        group: 'Default'
+        label: 'Date'
+        description: 'In MM/DD/YYYY format'
+        placeholder: ''
+        required: no
+        validationOptions: []
+        template:
+            """
+            <div class="form-group question">
+                <h21 class="header21">
+                    <span class="icon icon-row-gripper"></span>
+                    <span class="title">{{label}}</span>
+                    <span class="edit-btn">Edit question</span>
+                    <span class="pull-right remove-btn" ng-click="popover.remove($event)">Remove</span>
+                </h21>
+                <div class="col-sm-8 form-elements" ng-controller="DateController">
+                    <p class="input-group">
+                        <input type="text"
+                          validator-required="{{required}}"
+                          validator-group="{{formName}}"
+                          class="form-control"
+                          datepicker-popup="{{format}}"
+                          ng-model="date" is-open="opened"
+                          min-date="minDate"
+                          datepicker-options="dateOptions"
+                          date-disabled="disabled(date, mode)"
+                          close-text="Close"
+                          id="{{formName+index}}"
+                          placeholder="{{placeholder}}" />
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <p class='help-block'>{{description}}</p>
+                </div>
+            </div>
+            """
+        popoverTemplate:
+            """
+            <form>
+                <div class="form-group question">
+                    <label class='control-label'>Label</label>
+                    <input type='text' ng-model="label" validator="[required]" class='form-control'/>
+                </div>
+                <div class="form-group question">
+                    <label class='control-label'>Description</label>
+                    <input type='text' ng-model="description" class='form-control'/>
+                </div>
+                <div class="form-group question">
+                    <label class='control-label'>Placeholder</label>
+                    <input type='text' ng-model="placeholder" class='form-control'/>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type='checkbox' ng-model="required" />
+                        Required</label>
+                </div>
+                <div class="form-group" ng-if="validationOptions.length > 0">
+                    <label class='control-label'>Validation</label>
+                    <select ng-model="$parent.validation" class='form-control' ng-options="option.rule as option.label for option in validationOptions"></select>
+                </div>
+
+                <hr/>
+                <div class='form-group'>
+                    <input type='submit' ng-click="popover.save($event)" class='btn btn-primary' value='Save'/>
+                    <input type='button' ng-click="popover.cancel($event)" class='btn btn-default' value='Cancel'/>
+                    <input type='button' ng-click="popover.remove($event)" class='btn btn-danger' value='Delete'/>
+                </div>
+            </form>
+            """
+
     $builderProvider.registerComponent 'textInput',
         group: 'Default'
         label: 'Answer in one line'
