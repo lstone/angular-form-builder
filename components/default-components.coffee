@@ -6,9 +6,9 @@ angular.module 'builder.components', ['builder', 'validator.rules']
     # ----------------------------------------
     $builderProvider.registerComponent 'textInput',
         group: 'Default'
-        label: 'Text Input'
-        description: 'description'
-        placeholder: 'placeholder'
+        label: 'Answer in one line'
+        description: ''
+        placeholder: ''
         required: no
         validationOptions: [
             {label: 'none', rule: '/.*/'}
@@ -18,10 +18,15 @@ angular.module 'builder.components', ['builder', 'validator.rules']
         ]
         template:
             """
-            <div class="form-group">
-                <label for="{{formName+index}}" class="col-sm-4 control-label" ng-class="{'fb-required':required}">{{label}}</label>
-                <div class="col-sm-8">
-                    <input type="text" ng-model="inputText" validator-required="{{required}}" validator-group="{{formName}}" id="{{formName+index}}" class="form-control" placeholder="{{placeholder}}"/>
+            <div class="form-group question">
+                <h21 class="header21">
+                    <span class="icon icon-row-gripper"></span>
+                    <span class="title">{{label}}</span>
+                    <span class="edit-btn">Edit question</span>
+                    <span class="pull-right remove-btn" ng-click="popover.remove($event)">Remove</span>
+                </h21>
+                <div class="col-sm-8 form-elements">
+                    <input type="text" ng-model="inputText" validator-required="{{required}}" validator-group="{{formName}}" id="{{formName+index}}" placeholder="{{placeholder}}"/>
                     <p class='help-block'>{{description}}</p>
                 </div>
             </div>
@@ -29,15 +34,15 @@ angular.module 'builder.components', ['builder', 'validator.rules']
         popoverTemplate:
             """
             <form>
-                <div class="form-group">
+                <div class="form-group question">
                     <label class='control-label'>Label</label>
                     <input type='text' ng-model="label" validator="[required]" class='form-control'/>
                 </div>
-                <div class="form-group">
+                <div class="form-group question">
                     <label class='control-label'>Description</label>
                     <input type='text' ng-model="description" class='form-control'/>
                 </div>
-                <div class="form-group">
+                <div class="form-group question">
                     <label class='control-label'>Placeholder</label>
                     <input type='text' ng-model="placeholder" class='form-control'/>
                 </div>
@@ -65,16 +70,21 @@ angular.module 'builder.components', ['builder', 'validator.rules']
     # ----------------------------------------
     $builderProvider.registerComponent 'textArea',
         group: 'Default'
-        label: 'Text Area'
-        description: 'description'
-        placeholder: 'placeholder'
+        label: 'Answer in multiple lines'
+        description: ''
+        placeholder: ''
         required: no
         template:
             """
-            <div class="form-group">
-                <label for="{{formName+index}}" class="col-sm-4 control-label" ng-class="{'fb-required':required}">{{label}}</label>
-                <div class="col-sm-8">
-                    <textarea type="text" ng-model="inputText" validator-required="{{required}}" validator-group="{{formName}}" id="{{formName+index}}" class="form-control" rows='6' placeholder="{{placeholder}}"/>
+            <div class="form-group question">
+                <h21 class="header21">
+                    <span class="icon icon-row-gripper"></span>
+                    <span class="title">{{label}}</span>
+                    <span class="edit-btn">Edit question</span>
+                    <span class="pull-right remove-btn" ng-click="popover.remove($event)">Remove</span>
+                </h21>
+                <div class="col-sm-8 form-elements">
+                    <textarea type="text" ng-model="inputText" validator-required="{{required}}" validator-group="{{formName}}" id="{{formName+index}}" rows='6' placeholder="{{placeholder}}"/>
                     <p class='help-block'>{{description}}</p>
                 </div>
             </div>
@@ -82,15 +92,15 @@ angular.module 'builder.components', ['builder', 'validator.rules']
         popoverTemplate:
             """
             <form>
-                <div class="form-group">
+                <div class="form-group question">
                     <label class='control-label'>Label</label>
                     <input type='text' ng-model="label" validator="[required]" class='form-control'/>
                 </div>
-                <div class="form-group">
+                <div class="form-group question">
                     <label class='control-label'>Description</label>
                     <input type='text' ng-model="description" class='form-control'/>
                 </div>
-                <div class="form-group">
+                <div class="form-group question">
                     <label class='control-label'>Placeholder</label>
                     <input type='text' ng-model="placeholder" class='form-control'/>
                 </div>
@@ -115,16 +125,21 @@ angular.module 'builder.components', ['builder', 'validator.rules']
     $builderProvider.registerComponent 'checkbox',
         group: 'Default'
         label: 'Checkbox'
-        description: 'description'
-        placeholder: 'placeholder'
+        description: ''
+        placeholder: ''
         required: no
         options: ['value one', 'value two']
         arrayToText: yes
         template:
             """
-            <div class="form-group">
-                <label for="{{formName+index}}" class="col-sm-4 control-label" ng-class="{'fb-required':required}">{{label}}</label>
-                <div class="col-sm-8">
+            <div class="form-group question">
+                <h21 class="header21">
+                    <span class="icon icon-row-gripper"></span>
+                    <span class="title">{{label}}</span>
+                    <span class="edit-btn">Edit question</span>
+                    <span class="pull-right remove-btn" ng-click="popover.remove($event)">Remove</span>
+                </h21>
+                <div class="col-sm-8 form-elements">
                     <input type='hidden' ng-model="inputText" validator-required="{{required}}" validator-group="{{formName}}"/>
                     <div class='checkbox' ng-repeat="item in options track by $index">
                         <label><input type='checkbox' ng-model="$parent.inputArray[$index]" value='item'/>
@@ -138,15 +153,15 @@ angular.module 'builder.components', ['builder', 'validator.rules']
         popoverTemplate:
             """
             <form>
-                <div class="form-group">
+                <div class="form-group question">
                     <label class='control-label'>Label</label>
                     <input type='text' ng-model="label" validator="[required]" class='form-control'/>
                 </div>
-                <div class="form-group">
+                <div class="form-group question">
                     <label class='control-label'>Description</label>
                     <input type='text' ng-model="description" class='form-control'/>
                 </div>
-                <div class="form-group">
+                <div class="form-group question">
                     <label class='control-label'>Options</label>
                     <textarea class="form-control" rows="3" ng-model="optionsText"/>
                 </div>
@@ -172,15 +187,20 @@ angular.module 'builder.components', ['builder', 'validator.rules']
     $builderProvider.registerComponent 'radio',
         group: 'Default'
         label: 'Radio'
-        description: 'description'
-        placeholder: 'placeholder'
+        description: ''
+        placeholder: ''
         required: no
         options: ['value one', 'value two']
         template:
             """
-            <div class="form-group">
-                <label for="{{formName+index}}" class="col-sm-4 control-label" ng-class="{'fb-required':required}">{{label}}</label>
-                <div class="col-sm-8">
+            <div class="form-group question">
+                <h21 class="header21">
+                    <span class="icon icon-row-gripper"></span>
+                    <span class="title">{{label}}</span>
+                    <span class="edit-btn">Edit question</span>
+                    <span class="pull-right remove-btn" ng-click="popover.remove($event)">Remove</span>
+                </h21>
+                <div class="col-sm-8 form-elements">
                     <div class='radio' ng-repeat="item in options track by $index">
                         <label><input name='{{formName+index}}' ng-model="$parent.inputText" validator-group="{{formName}}" value='{{item}}' type='radio'/>
                             {{item}}
@@ -193,15 +213,15 @@ angular.module 'builder.components', ['builder', 'validator.rules']
         popoverTemplate:
             """
             <form>
-                <div class="form-group">
+                <div class="form-group question">
                     <label class='control-label'>Label</label>
                     <input type='text' ng-model="label" validator="[required]" class='form-control'/>
                 </div>
-                <div class="form-group">
+                <div class="form-group question">
                     <label class='control-label'>Description</label>
                     <input type='text' ng-model="description" class='form-control'/>
                 </div>
-                <div class="form-group">
+                <div class="form-group question">
                     <label class='control-label'>Options</label>
                     <textarea class="form-control" rows="3" ng-model="optionsText"/>
                 </div>
@@ -221,15 +241,20 @@ angular.module 'builder.components', ['builder', 'validator.rules']
     $builderProvider.registerComponent 'select',
         group: 'Default'
         label: 'Select'
-        description: 'description'
-        placeholder: 'placeholder'
+        description: ''
+        placeholder: ''
         required: no
         options: ['value one', 'value two']
         template:
             """
-            <div class="form-group">
-                <label for="{{formName+index}}" class="col-sm-4 control-label">{{label}}</label>
-                <div class="col-sm-8">
+            <div class="form-group question">
+                <h21 class="header21">
+                    <span class="icon icon-row-gripper"></span>
+                    <span class="title">{{label}}</span>
+                    <span class="edit-btn">Edit question</span>
+                    <span class="pull-right remove-btn" ng-click="popover.remove($event)">Remove</span>
+                </h21>
+                <div class="col-sm-8 form-elements">
                     <select ng-options="value for value in options" id="{{formName+index}}" class="form-control"
                         ng-model="inputText" ng-init="inputText = options[0]"/>
                     <p class='help-block'>{{description}}</p>
@@ -239,15 +264,15 @@ angular.module 'builder.components', ['builder', 'validator.rules']
         popoverTemplate:
             """
             <form>
-                <div class="form-group">
+                <div class="form-group question">
                     <label class='control-label'>Label</label>
                     <input type='text' ng-model="label" validator="[required]" class='form-control'/>
                 </div>
-                <div class="form-group">
+                <div class="form-group question">
                     <label class='control-label'>Description</label>
                     <input type='text' ng-model="description" class='form-control'/>
                 </div>
-                <div class="form-group">
+                <div class="form-group question">
                     <label class='control-label'>Options</label>
                     <textarea class="form-control" rows="3" ng-model="optionsText"/>
                 </div>
