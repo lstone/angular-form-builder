@@ -267,8 +267,17 @@ angular.module 'builder.directive', [
             </li>
         </ul>
         <div class='form-horizontal'>
-            <div class='fb-component' ng-repeat="component in components"
-                fb-component="component"></div>
+            <span ng-repeat="component in components.slice().reverse()">
+                <div class='custom-questions-header' ng-if="$index == 0">
+                    <h3>Questions by Practice Fusion</h3>
+                    <p>Click or drag and drop into form on right</p>
+                </div>
+                <div class='questions-header' ng-if="$index == components.length - 5">
+                    <h3>Build custom questions</h3>
+                    <p>Drag and drop into form on right</p>
+                </div>
+                <div class='fb-component' fb-component="component"></div>
+            </span>
         </div>
         """
     controller: 'fbComponentsController'
