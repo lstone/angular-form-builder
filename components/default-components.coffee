@@ -129,6 +129,7 @@ angular.module 'builder.components', ['builder', 'validator.rules']
                 <div class="form-group">
                     <label class='control-label'>Options</label>
                     <textarea class="form-control" rows="3" ng-model="optionsText"/>
+                    <span class="help-text">Click "enter" after every option entry.</span>
                 </div>
 
                 <hr/>
@@ -179,6 +180,7 @@ angular.module 'builder.components', ['builder', 'validator.rules']
                 <div class="form-group">
                     <label class='control-label'>Options</label>
                     <textarea class="form-control" rows="3" ng-model="optionsText"/>
+                    <span class="help-text">Click "enter" after every option entry.</span>
                 </div>
 
                 <hr/>
@@ -226,6 +228,7 @@ angular.module 'builder.components', ['builder', 'validator.rules']
                 <div class="form-group">
                     <label class='control-label'>Options</label>
                     <textarea class="form-control" rows="3" ng-model="optionsText"/>
+                    <span class="help-text">Click "enter" after every option entry.</span>
                 </div>
 
                 <hr/>

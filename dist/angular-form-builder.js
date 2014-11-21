@@ -233,17 +233,14 @@
               return $(element).find('.empty').remove();
             },
             up: function(e, isHover, draggable) {
-              var formObject, newIndex, oldIndex;
+              var newIndex, oldIndex;
               beginMove = true;
               if (!$drag.isMouseMoved()) {
                 $(element).find('.empty').remove();
                 return;
               }
               if (!isHover && draggable.mode === 'drag') {
-                formObject = draggable.object.formObject;
-                if (formObject.editable) {
-                  $builder.removeFormObject(attrs.fbBuilder, formObject.index);
-                }
+
               } else if (isHover) {
                 if (draggable.mode === 'mirror') {
                   $builder.insertFormObject(scope.formName, $(element).find('.empty').index('.fb-form-object-editable'), {

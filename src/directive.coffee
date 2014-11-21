@@ -91,9 +91,11 @@ angular.module 'builder.directive', [
 
                 if not isHover and draggable.mode is 'drag'
                     # remove the form object by draggin out
-                    formObject = draggable.object.formObject
-                    if formObject.editable
-                        $builder.removeFormObject attrs.fbBuilder, formObject.index
+                    # NOTE: commenting out this functionality because there's a bug in the code that removes components instead of reordering them.
+#                    formObject = draggable.object.formObject
+#                    if formObject.editable
+#                        console.log 'if not isHover and draggable.mode is "drag"', scope.formName, formObject
+#                        $builder.removeFormObject attrs.fbBuilder, formObject.index
                 else if isHover
                     if draggable.mode is 'mirror'
                         # insert a form object
@@ -104,6 +106,7 @@ angular.module 'builder.directive', [
                         oldIndex = draggable.object.formObject.index
                         newIndex = $(element).find('.empty').index('.fb-form-object-editable')
                         newIndex-- if oldIndex < newIndex
+#                        console.log 'if draggable.mode is "drag"', scope.formName, oldIndex, newIndex
                         $builder.updateFormObjectIndex scope.formName, oldIndex, newIndex
                 $(element).find('.empty').remove()
 ]
