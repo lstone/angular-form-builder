@@ -1,4 +1,20 @@
 angular.module 'builder.components', ['builder', 'validator.rules']
+# don't allow more than maxlength of characters in field: http://stackoverflow.com/questions/17075969/ng-maxlength-screws-up-my-model
+angular.module('builder.components').directive "pfMaxlength", ->
+  require: "ngModel"
+  link: (scope, element, attrs, ngModelCtrl) ->
+    fromUser = (text) ->
+      if text.length > maxlength
+        console.log 'too many characters'
+        transformedInput = text.substring(0, maxlength)
+        ngModelCtrl.$setViewValue transformedInput
+        ngModelCtrl.$render()
+        return transformedInput
+      text
+    maxlength = Number(attrs.myMaxlength)
+    ngModelCtrl.$parsers.push fromUser
+    return
+
 .config ['$builderProvider', ($builderProvider) ->
     # ----------------------------------------
     # text input
@@ -35,7 +51,7 @@ angular.module 'builder.components', ['builder', 'validator.rules']
             <form id="provider" data-element="text-input-popover">
                 <div class="form-group question-name">
                     <label class='control-label required'>Question name</label>
-                    <input type='text' ng-model="label" validator="[required]" class='form-control' data-element="text-input-popover-name-input"/>
+                    <input type='text' pf-maxlength='300' ng-model="label" validator="[required]" class='form-control' data-element="text-input-popover-name-input"/>
                 </div>
 
                 <hr/>
@@ -76,7 +92,7 @@ angular.module 'builder.components', ['builder', 'validator.rules']
             <form id="provider" data-element="text-area-popover">
                 <div class="form-group question-name">
                     <label class='control-label required'>Question name</label>
-                    <input type='text' ng-model="label" validator="[required]" class='form-control' data-element="text-area-popover-name-input"/>
+                    <input type='text' pf-maxlength='300' ng-model="label" validator="[required]" class='form-control' data-element="text-area-popover-name-input"/>
                 </div>
 
                 <hr/>
@@ -124,7 +140,7 @@ angular.module 'builder.components', ['builder', 'validator.rules']
             <form id="provider" data-element="checkbox-popover">
                 <div class="form-group question-name">
                     <label class='control-label required'>Question name</label>
-                    <input type='text' ng-model="label" validator="[required]" class='form-control' data-element="checkbox-popover-name-input"/>
+                    <input type='text' pf-maxlength='300' ng-model="label" validator="[required]" class='form-control' data-element="checkbox-popover-name-input"/>
                 </div>
                 <div class="form-group">
                     <label class='control-label'>Options</label>
@@ -175,7 +191,7 @@ angular.module 'builder.components', ['builder', 'validator.rules']
             <form id="provider" data-element="radio-popover">
                 <div class="form-group question-name">
                     <label class='control-label required'>Question name</label>
-                    <input type='text' ng-model="label" validator="[required]" class='form-control' data-element="radio-popover-name-input"/>
+                    <input type='text' pf-maxlength='300' ng-model="label" validator="[required]" class='form-control' data-element="radio-popover-name-input"/>
                 </div>
                 <div class="form-group">
                     <label class='control-label'>Options</label>
@@ -223,7 +239,7 @@ angular.module 'builder.components', ['builder', 'validator.rules']
             <form id="provider" data-element="select-popover">
                 <div class="form-group question-name">
                     <label class='control-label required'>Question name</label>
-                    <input type='text' ng-model="label" validator="[required]" class='form-control' data-element="select-popover-name-input"/>
+                    <input type='text' pf-maxlength='300' ng-model="label" validator="[required]" class='form-control' data-element="select-popover-name-input"/>
                 </div>
                 <div class="form-group">
                     <label class='control-label'>Options</label>
