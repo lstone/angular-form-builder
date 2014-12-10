@@ -279,7 +279,7 @@ angular.module 'builder.directive', [
                     <h3>Build custom questions</h3>
                     <p>Drag and drop into form on right</p>
                 </div>
-                <div class='fb-component' fb-component="component"></div>
+                <div class='fb-component' fb-component="component" data-element="{{component.name}}"></div>
             </span>
         </div>
         """

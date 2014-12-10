@@ -17,12 +17,12 @@ angular.module 'builder.components', ['builder', 'validator.rules']
         ]
         template:
             """
-            <div class="form-group question text-input">
+            <div class="form-group question text-input" data-element="text-input">
                 <h4 class="question-header">
                     <span class="icon icon-gripper"></span>
-                    <span class="title">{{label}}</span>
-                    <span class="edit-btn">Edit question</span>
-                    <span class="pull-right remove-btn" ng-click="popover.remove($event)">Remove</span>
+                    <span class="title" data-element="text-input-title">{{label}}</span>
+                    <span class="edit-btn" data-element="text-input-edit-btn">Edit question</span>
+                    <span class="pull-right remove-btn" data-element="text-input-remove-btn" ng-click="popover.remove($event)">Remove</span>
                 </h4>
                 <div class="col-sm-8 form-elements">
                     <input type="text" ng-model="inputText" validator-required="{{required}}" validator-group="{{formName}}" id="{{formName+index}}" placeholder="{{placeholder}}"/>
@@ -32,17 +32,17 @@ angular.module 'builder.components', ['builder', 'validator.rules']
             """
         popoverTemplate:
             """
-            <form id="provider">
+            <form id="provider" data-element="text-input-popover">
                 <div class="form-group question-name">
                     <label class='control-label required'>Question name</label>
-                    <input type='text' ng-model="label" validator="[required]" class='form-control'/>
+                    <input type='text' ng-model="label" validator="[required]" class='form-control' data-element="text-input-popover-name-input"/>
                 </div>
 
                 <hr/>
                 <div class='form-group'>
-                    <i ng-click="popover.cancel($event)" class='icon icon-go-away'></i>
-                    <input type='submit' ng-click="popover.save($event)" class='btn btn-primary' value='Save question'/>
-                    <input type='button' ng-click="popover.remove($event)" class='btn btn-danger' value='Delete'/>
+                    <i ng-click="popover.cancel($event)" class='icon icon-go-away' data-element="text-input-popover-close"></i>
+                    <input type='submit' ng-click="popover.save($event)" class='btn btn-primary' data-element="text-input-popover-submit-btn" value='Save question'/>
+                    <input type='button' ng-click="popover.remove($event)" class='btn btn-danger' data-element="text-input-popover-remove-btn" value='Delete'/>
                 </div>
             </form>
             """
@@ -58,12 +58,12 @@ angular.module 'builder.components', ['builder', 'validator.rules']
         required: no
         template:
             """
-            <div class="form-group question text-area">
+            <div class="form-group question text-area" data-element="text-area">
                 <h4 class="question-header">
                     <span class="icon icon-gripper"></span>
-                    <span class="title">{{label}}</span>
-                    <span class="edit-btn">Edit question</span>
-                    <span class="pull-right remove-btn" ng-click="popover.remove($event)">Remove</span>
+                    <span class="title" data-element="text-area-title">{{label}}</span>
+                    <span class="edit-btn" data-element="text-area-edit-btn">Edit question</span>
+                    <span class="pull-right remove-btn" data-element="text-area-remove-btn" ng-click="popover.remove($event)">Remove</span>
                 </h4>
                 <div class="col-sm-8 form-elements">
                     <textarea type="text" ng-model="inputText" validator-required="{{required}}" validator-group="{{formName}}" id="{{formName+index}}" rows='6' ng-attr-placeholder="{{placeholder}}"/>
@@ -73,17 +73,17 @@ angular.module 'builder.components', ['builder', 'validator.rules']
             """
         popoverTemplate:
             """
-            <form id="provider">
+            <form id="provider" data-element="text-area-popover">
                 <div class="form-group question-name">
                     <label class='control-label required'>Question name</label>
-                    <input type='text' ng-model="label" validator="[required]" class='form-control'/>
+                    <input type='text' ng-model="label" validator="[required]" class='form-control' data-element="text-area-popover-name-input"/>
                 </div>
 
                 <hr/>
                 <div class='form-group'>
-                    <i ng-click="popover.cancel($event)" class='icon icon-go-away'></i>
-                    <input type='submit' ng-click="popover.save($event)" class='btn btn-primary' value='Save question'/>
-                    <input type='button' ng-click="popover.remove($event)" class='btn btn-danger' value='Delete'/>
+                    <i ng-click="popover.cancel($event)" class='icon icon-go-away' data-element="text-area-popover-close"></i>
+                    <input type='submit' ng-click="popover.save($event)" class='btn btn-primary' data-element="text-area-popover-submit-btn" value='Save question'/>
+                    <input type='button' ng-click="popover.remove($event)" class='btn btn-danger' data-element="text-area-popover-remove-btn" value='Delete'/>
                 </div>
             </form>
             """
@@ -101,12 +101,12 @@ angular.module 'builder.components', ['builder', 'validator.rules']
         arrayToText: yes
         template:
             """
-            <div class="form-group question checkbox">
+            <div class="form-group question checkbox" data-element="checkbox">
                 <h4 class="question-header">
                     <span class="icon icon-gripper"></span>
-                    <span class="title">{{label}}</span>
-                    <span class="edit-btn">Edit question</span>
-                    <span class="pull-right remove-btn" ng-click="popover.remove($event)">Remove</span>
+                    <span class="title" data-element="checkbox-title">{{label}}</span>
+                    <span class="edit-btn" data-element="checkbox-edit-btn">Edit question</span>
+                    <span class="pull-right remove-btn" data-element="checkbox-remove-btn" ng-click="popover.remove($event)">Remove</span>
                 </h4>
                 <div class="col-sm-8 form-elements">
                     <input type='hidden' ng-model="inputText" validator-required="{{required}}" validator-group="{{formName}}"/>
@@ -121,22 +121,22 @@ angular.module 'builder.components', ['builder', 'validator.rules']
             """
         popoverTemplate:
             """
-            <form id="provider">
+            <form id="provider" data-element="checkbox-popover">
                 <div class="form-group question-name">
                     <label class='control-label required'>Question name</label>
-                    <input type='text' ng-model="label" validator="[required]" class='form-control'/>
+                    <input type='text' ng-model="label" validator="[required]" class='form-control' data-element="checkbox-popover-name-input"/>
                 </div>
                 <div class="form-group">
                     <label class='control-label'>Options</label>
-                    <textarea class="form-control" rows="3" ng-model="optionsText"/>
+                    <textarea class="form-control" rows="3" ng-model="optionsText" data-element="checkbox-options-input"/>
                     <span class="help-text">Click "enter" after every option entry.</span>
                 </div>
 
                 <hr/>
                 <div class='form-group'>
-                    <i ng-click="popover.cancel($event)" class='icon icon-go-away'></i>
-                    <input type='submit' ng-click="popover.save($event)" class='btn btn-primary' value='Save question'/>
-                    <input type='button' ng-click="popover.remove($event)" class='btn btn-danger' value='Delete'/>
+                    <i ng-click="popover.cancel($event)" class='icon icon-go-away' data-element="checkbox-popover-close"></i>
+                    <input type='submit' ng-click="popover.save($event)" class='btn btn-primary' data-element="checkbox-popover-submit-btn" value='Save question'/>
+                    <input type='button' ng-click="popover.remove($event)" class='btn btn-danger' data-element="checkbox-popover-remove-btn" value='Delete'/>
                 </div>
             </form>
             """
@@ -153,12 +153,12 @@ angular.module 'builder.components', ['builder', 'validator.rules']
         options: ['value one', 'value two']
         template:
             """
-            <div class="form-group question radio">
+            <div class="form-group question radio" data-element="radio">
                 <h4 class="question-header">
                     <span class="icon icon-gripper"></span>
-                    <span class="title">{{label}}</span>
-                    <span class="edit-btn">Edit question</span>
-                    <span class="pull-right remove-btn" ng-click="popover.remove($event)">Remove</span>
+                    <span class="title" data-element="radio-title">{{label}}</span>
+                    <span class="edit-btn" data-element="radio-edit-btn">Edit question</span>
+                    <span class="pull-right remove-btn" data-element="radio-remove-btn" ng-click="popover.remove($event)">Remove</span>
                 </h4>
                 <div class="col-sm-8 form-elements">
                     <div class='radio' ng-repeat="item in options track by $index">
@@ -172,22 +172,22 @@ angular.module 'builder.components', ['builder', 'validator.rules']
             """
         popoverTemplate:
             """
-            <form id="provider">
+            <form id="provider" data-element="radio-popover">
                 <div class="form-group question-name">
                     <label class='control-label required'>Question name</label>
-                    <input type='text' ng-model="label" validator="[required]" class='form-control'/>
+                    <input type='text' ng-model="label" validator="[required]" class='form-control' data-element="radio-popover-name-input"/>
                 </div>
                 <div class="form-group">
                     <label class='control-label'>Options</label>
-                    <textarea class="form-control" rows="3" ng-model="optionsText"/>
+                    <textarea class="form-control" rows="3" ng-model="optionsText" data-element="radio-options-input"/>
                     <span class="help-text">Click "enter" after every option entry.</span>
                 </div>
 
                 <hr/>
                 <div class='form-group'>
-                    <i ng-click="popover.cancel($event)" class='icon icon-go-away'></i>
-                    <input type='submit' ng-click="popover.save($event)" class='btn btn-primary' value='Save question'/>
-                    <input type='button' ng-click="popover.remove($event)" class='btn btn-danger' value='Delete'/>
+                    <i ng-click="popover.cancel($event)" class='icon icon-go-away' data-element="radio-popover-close"></i>
+                    <input type='submit' ng-click="popover.save($event)" class='btn btn-primary' data-element="radio-popover-submit-btn" value='Save question'/>
+                    <input type='button' ng-click="popover.remove($event)" class='btn btn-danger' data-element="radio-popover-remove-btn" value='Delete'/>
                 </div>
             </form>
             """
@@ -204,12 +204,12 @@ angular.module 'builder.components', ['builder', 'validator.rules']
         options: ['value one', 'value two']
         template:
             """
-            <div class="form-group question select">
+            <div class="form-group question select" data-element="select">
                 <h4 class="question-header">
                     <span class="icon icon-gripper"></span>
-                    <span class="title">{{label}}</span>
-                    <span class="edit-btn">Edit question</span>
-                    <span class="pull-right remove-btn" ng-click="popover.remove($event)">Remove</span>
+                    <span class="title" data-element="select-title">{{label}}</span>
+                    <span class="edit-btn" data-element="select-edit-btn">Edit question</span>
+                    <span class="pull-right remove-btn" data-element="select-remove-btn" ng-click="popover.remove($event)">Remove</span>
                 </h4>
                 <div class="col-sm-8 form-elements">
                     <select ng-options="value for value in options" id="{{formName+index}}" class="form-control"
@@ -220,22 +220,22 @@ angular.module 'builder.components', ['builder', 'validator.rules']
             """
         popoverTemplate:
             """
-            <form id="provider">
+            <form id="provider" data-element="select-popover">
                 <div class="form-group question-name">
                     <label class='control-label required'>Question name</label>
-                    <input type='text' ng-model="label" validator="[required]" class='form-control'/>
+                    <input type='text' ng-model="label" validator="[required]" class='form-control' data-element="select-popover-name-input"/>
                 </div>
                 <div class="form-group">
                     <label class='control-label'>Options</label>
-                    <textarea class="form-control" rows="3" ng-model="optionsText"/>
+                    <textarea class="form-control" rows="3" ng-model="optionsText" data-element="select-options-input"/>
                     <span class="help-text">Click "enter" after every option entry.</span>
                 </div>
 
                 <hr/>
                 <div class='form-group'>
-                    <i ng-click="popover.cancel($event)" class='icon icon-go-away'></i>
-                    <input type='submit' ng-click="popover.save($event)" class='btn btn-primary' value='Save question'/>
-                    <input type='button' ng-click="popover.remove($event)" class='btn btn-danger' value='Delete'/>
+                    <i ng-click="popover.cancel($event)" class='icon icon-go-away' data-element="select-popover-close"></i>
+                    <input type='submit' ng-click="popover.save($event)" class='btn btn-primary' data-element="select-popover-submit-btn" value='Save question'/>
+                    <input type='button' ng-click="popover.remove($event)" class='btn btn-danger' data-element="select-popover-remove-btn" value='Delete'/>
                 </div>
             </form>
             """
