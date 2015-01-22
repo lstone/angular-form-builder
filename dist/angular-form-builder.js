@@ -93,8 +93,10 @@
     }
   ]).controller('fbComponentsController', [
     '$scope', '$injector', function($scope, $injector) {
-      var $builder;
+      var $builder, component, name, _ref, _ref1;
       $builder = $injector.get('$builder');
+      $scope.customComponents = [];
+      $scope.pfComponents = [];
       $scope.selectGroup = function($event, group) {
         var component, name, _ref, _results;
         if ($event != null) {
@@ -112,12 +114,23 @@
         }
         return _results;
       };
+      _ref = $builder.components;
+      for (name in _ref) {
+        component = _ref[name];
+        if (component.group === 'Default') {
+          $scope.customComponents.push(component);
+        }
+      }
+      _ref1 = $builder.components;
+      for (name in _ref1) {
+        component = _ref1[name];
+        if (component.group === 'PracticeFusion') {
+          $scope.pfComponents.push(component);
+        }
+      }
       $scope.groups = $builder.groups;
       $scope.activeGroup = $scope.groups[0];
-      $scope.allComponents = $builder.components;
-      return $scope.$watch('allComponents', function() {
-        return $scope.selectGroup(null, $scope.activeGroup);
-      });
+      return $scope.allComponents = $builder.components;
     }
   ]).controller('fbComponentController', [
     '$scope', function($scope) {
@@ -415,7 +428,7 @@
   ]).directive('fbComponents', function() {
     return {
       restrict: 'A',
-      template: "<ul ng-if=\"groups.length > 1\" class=\"nav nav-tabs nav-justified\">\n    <li ng-repeat=\"group in groups\" ng-class=\"{active:activeGroup==group}\">\n        <a href='#' ng-click=\"selectGroup($event, group)\">{{group}}</a>\n    </li>\n</ul>\n<div class='form-horizontal'>\n    <span ng-repeat=\"component in components.slice().reverse()\">\n        <div class='custom-questions-header' ng-if=\"$index == 0\">\n            <h3>Questions by Practice Fusion</h3>\n            <p>Click or drag and drop into form on right</p>\n        </div>\n        <div class='questions-header' ng-if=\"$index == components.length - 5\">\n            <h3>Build custom questions</h3>\n            <p>Drag and drop into form on right</p>\n        </div>\n        <div class='fb-component' fb-component=\"component\" data-element=\"{{component.name}}\"></div>\n    </span>\n</div>",
+      template: "<div class='form-horizontal'>\n    <span ng-repeat=\"component in pfComponents.slice().reverse()\">\n        <div class='custom-questions-header' ng-if=\"$index == 0\">\n            <p class=\"read-only-text\" style=\"display:none;\">You can click or drag and drop into form on right, only after you make a copy of this template.</p>\n            <h3>Questions by Practice Fusion</h3>\n            <p class=\"editable-only-text\">Click or drag and drop into form on right</p>\n        </div>\n        <div class='fb-component' fb-component=\"component\" data-element=\"{{component.name}}\"></div>\n    </span>\n    <span ng-repeat=\"component in customComponents\">\n        <div class='questions-header' ng-if=\"$index == 0\">\n            <h3>Build custom questions</h3>\n            <p>Drag and drop into form on right</p>\n        </div>\n        <div class='fb-component' fb-component=\"component\" data-element=\"{{component.name}}\"></div>\n    </span>\n</div>",
       controller: 'fbComponentsController'
     };
   }).directive('fbComponent', [

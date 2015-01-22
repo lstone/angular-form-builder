@@ -83,6 +83,8 @@ angular.module 'builder.controller', ['builder.provider']
 .controller 'fbComponentsController', ['$scope', '$injector', ($scope, $injector) ->
     # providers
     $builder = $injector.get '$builder'
+    $scope.customComponents = []
+    $scope.pfComponents = []
 
     # action
     $scope.selectGroup = ($event, group) ->
@@ -92,10 +94,16 @@ angular.module 'builder.controller', ['builder.provider']
         for name, component of $builder.components when component.group is group
             $scope.components.push component
 
+    # parsing our components into groups - LS
+    for name, component of $builder.components when component.group is 'Default'
+      $scope.customComponents.push component
+    for name, component of $builder.components when component.group is 'PracticeFusion'
+      $scope.pfComponents.push component
+
     $scope.groups = $builder.groups
     $scope.activeGroup = $scope.groups[0]
     $scope.allComponents = $builder.components
-    $scope.$watch 'allComponents', -> $scope.selectGroup null, $scope.activeGroup
+#    $scope.$watch 'allComponents', -> $scope.selectGroup null, $scope.activeGroup
 ]
 
 

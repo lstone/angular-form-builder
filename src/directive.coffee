@@ -264,18 +264,17 @@ angular.module 'builder.directive', [
     restrict: 'A'
     template:
         """
-        <ul ng-if="groups.length > 1" class="nav nav-tabs nav-justified">
-            <li ng-repeat="group in groups" ng-class="{active:activeGroup==group}">
-                <a href='#' ng-click="selectGroup($event, group)">{{group}}</a>
-            </li>
-        </ul>
         <div class='form-horizontal'>
-            <span ng-repeat="component in components.slice().reverse()">
+            <span ng-repeat="component in pfComponents.slice().reverse()">
                 <div class='custom-questions-header' ng-if="$index == 0">
+                    <p class="read-only-text" style="display:none;">You can click or drag and drop into form on right, only after you make a copy of this template.</p>
                     <h3>Questions by Practice Fusion</h3>
-                    <p>Click or drag and drop into form on right</p>
+                    <p class="editable-only-text">Click or drag and drop into form on right</p>
                 </div>
-                <div class='questions-header' ng-if="$index == components.length - 5">
+                <div class='fb-component' fb-component="component" data-element="{{component.name}}"></div>
+            </span>
+            <span ng-repeat="component in customComponents">
+                <div class='questions-header' ng-if="$index == 0">
                     <h3>Build custom questions</h3>
                     <p>Drag and drop into form on right</p>
                 </div>
